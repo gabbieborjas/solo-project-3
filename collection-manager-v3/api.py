@@ -85,6 +85,7 @@ def delete_workout(workout_id):
     return jsonify({"status": "deleted"})
 
 if __name__ == '__main__':
-    # Render uses the PORT environment variable
+    # Render provides the port in an environment variable
     port = int(os.environ.get("PORT", 5000))
+    # You MUST bind to 0.0.0.0 for Render to 'see' the app
     app.run(host='0.0.0.0', port=port)
