@@ -1,7 +1,7 @@
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory # <--- MUST HAVE THIS
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder='.')
@@ -73,5 +73,5 @@ def delete(id):
     return jsonify({"status": "deleted"})
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000)) # Change 5000 to 10000 to match your log
+    port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
