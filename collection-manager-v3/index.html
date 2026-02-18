@@ -1,12 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <nav>
-    <h1>fitnesstracker.online</h1>
+    <h1>Fitness Tracker</h1>
     <div class="nav-links">
         <button onclick="showSection('list-view')">Workouts</button>
         <button onclick="showSection('stats-view')">Production Dashboard</button>
     </div>
 </nav>
 
-<main>
+<main id="app-container">
     <div class="controls-bar">
         <input type="text" id="filter-category" placeholder="Filter by Category..." oninput="loadData()">
         <select id="sort-by" onchange="loadData()">
@@ -22,12 +32,44 @@
 
     <section id="list-view">
         <div id="grid" class="grid"></div>
+        <div class="pagination-container">
+            <button id="prev-btn" onclick="changePage(-1)">Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-btn" onclick="changePage(1)">Next</button>
+        </div>
     </section>
 
     <section id="stats-view" class="hidden">
+        <h2>My Progress</h2>
         <div class="stats-cards">
-            <div class="card"><h3>Total Records</h3><span id="stat-total">0</span></div>
-            <div class="card"><h3>Active Page Size</h3><span id="stat-pagesize">10</span></div>
+            <div class="card">
+                <h3>Total Records</h3>
+                <span id="stat-total">0</span>
+            </div>
+            <div class="card">
+                <h3>Active Page Size</h3>
+                <span id="stat-pagesize">10</span>
+            </div>
+            <div class="card">
+                <h3>Total Minutes</h3>
+                <span id="stat-minutes">0</span>
+            </div>
         </div>
     </section>
+
+    <section id="form-view" class="hidden">
+        <h2>Add/Update Workout</h2>
+        <form id="workout-form">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="name" placeholder="Workout Name" required>
+            <input type="text" id="category" placeholder="Category (e.g. Barre)" required>
+            <input type="number" id="duration" placeholder="Duration (mins)" required>
+            <input type="url" id="image_url" placeholder="Image URL (Unsplash link)">
+            <button type="submit" id="save-btn">Save Workout</button>
+        </form>
+    </section>
 </main>
+
+<script src="app.js"></script>
+</body>
+</html>
