@@ -92,25 +92,55 @@ async function deleteItem(id) {
     }
 }
 
+async function handleFormSubmit(event) {
+    event.preventDefault(); // Stop page from refreshing
+
+    const newWorkout = {
+        name: document.getElementById('name').value,
+        category: document.getElementById('category').value,
+        duration: parseInt(document.getElementById('duration').value),
+        image_url: document.getElementById('image_url').value
+    };
+
+    try {
+        const response = await fetch('/api/workouts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newWorkout)
+        });
+
+        if (response.ok) {
+            alert("Workout added successfully!");
+            document.getElementById('workout-form').reset();
+            showSection('list-view'); // Go back to the workout list
+        }
+    } catch (err) {
+        console.error("Error saving workout:", err);
+    }
+}
+
 /**
  * NAVIGATION LOGIC
  * Fixes the "buttons not working" issue by managing section visibility.
  */
 window.showSection = function(id) {
-    // Hide all main sections
+    // 1. Hide every section
     document.getElementById('list-view').classList.add('hidden');
     document.getElementById('stats-view').classList.add('hidden');
     document.getElementById('form-view').classList.add('hidden');
     
-    // Toggle the controls bar (only show it on list-view)
+    // 2. Hide the search/filter bar by default
     const controls = document.getElementById('workouts-controls');
-    if (id === 'list-view') {
-        controls.style.display = 'flex';
-    } else {
-        controls.style.display = 'none';
-    }
+    controls.classList.add('hidden');
 
+    // 3. Show the one section the user clicked
     document.getElementById(id).classList.remove('hidden');
+
+    // 4. If they clicked 'Workouts', bring the search/filter bar back
+    if (id === 'list-view') {
+        controls.classList.remove('hidden');
+        loadData(); // Refresh the data
+    }
 };
 
 /**
