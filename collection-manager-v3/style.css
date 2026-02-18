@@ -1,0 +1,108 @@
+:root {
+    --primary: #00d1b2; /* Vibrant Teal */
+    --accent: #ff3860;  /* Bright Coral */
+    --dark: #363636;
+    --bg: #f5fffb;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    margin: 0;
+    font-size: 1.1rem; /* Bigger base font */
+}
+
+nav {
+    background: var(--dark);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+nav h1 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links button {
+    background: var(--primary);
+    border: none;
+    color: var(--dark);
+    padding: 12px 24px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.nav-links button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+main {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 10px solid var(--primary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    color: var(--dark);
+}
+
+/* Big Vibrant Buttons */
+button#save-btn, .pagination-container button {
+    background: var(--accent);
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 56, 96, 0.3);
+}
+
+.stats-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stats-cards .card {
+    text-align: center;
+    border-left: none;
+    border-top: 10px solid var(--accent);
+}
+
+.stats-cards span {
+    display: block;
+    font-size: 4rem; /* Giant stats */
+    font-weight: 900;
+    color: var(--dark);
+}
+
+.hidden { display: none; }
