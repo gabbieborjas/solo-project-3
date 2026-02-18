@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,7 +17,7 @@
     </nav>
 
     <main>
-        <div class="controls-bar">
+        <div id="workouts-controls" class="controls-bar">
             <input type="text" id="filter-category" placeholder="Filter by Category..." oninput="loadData()">
             <select id="sort-by" onchange="loadData()">
                 <option value="name">Sort by Name</option>
@@ -24,7 +25,7 @@
             </select>
             <select id="page-size-select" onchange="updatePageSize(this.value)">
                 <option value="5">5 per page</option>
-                <option value="10">10 per page</option>
+                <option value="10" selected>10 per page</option>
                 <option value="20">20 per page</option>
             </select>
         </div>
@@ -33,22 +34,56 @@
             <div id="grid" class="grid"></div>
             <div class="pagination">
                 <button onclick="changePage(-1)" id="prev-btn">Prev</button>
-                <span id="page-info"></span>
+                <span id="page-info">Page 1 of 1</span>
                 <button onclick="changePage(1)" id="next-btn">Next</button>
             </div>
         </section>
 
         <section id="stats-view" class="hidden">
+            <h2 class="section-title">Production Dashboard</h2>
             <div class="stats-cards">
-                <div class="card"><h3>Total Records</h3><span id="stat-total">0</span></div>
-                <div class="card"><h3>Page Size</h3><span id="stat-pagesize">10</span></div>
-                <div class="card"><h3>Total Minutes</h3><span id="stat-minutes">0</span></div>
+                <div class="card">
+                    <h3>Total Records</h3>
+                    <span id="stat-total" class="stat-number">0</span>
+                </div>
+                <div class="card">
+                    <h3>Active Page Size</h3>
+                    <span id="stat-pagesize" class="stat-number">10</span>
+                </div>
+                <div class="card">
+                    <h3>Total Minutes</h3>
+                    <span id="stat-minutes" class="stat-number">0</span>
+                </div>
             </div>
         </section>
         
         <section id="form-view" class="hidden">
-            </section>
+            <div class="form-container card">
+                <h2>Add New Workout</h2>
+                <form id="workout-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Workout Name</label>
+                        <input type="text" id="name" placeholder="e.g., Morning Barre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" placeholder="e.g., Barre, Cardio, Strength" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" placeholder="e.g., 30" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="image_url">Image URL</label>
+                        <input type="url" id="image_url" placeholder="Paste a link to a workout photo" required>
+                    </div>
+                    <button type="submit" class="btn-save">Save Workout</button>
+                </form>
+                <div id="form-feedback" class="hidden"></div>
+            </div>
+        </section>
     </main>
+
     <script src="app.js"></script>
 </body>
 </html>
