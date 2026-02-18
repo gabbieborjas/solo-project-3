@@ -73,6 +73,6 @@ def delete(id):
     return jsonify({"status": "deleted"})
 
 if __name__ == '__main__':
-    # Requirement: Bind to 0.0.0.0 and dynamic PORT for Render
+    # Render requires binding to 0.0.0.0 and the PORT environment variable
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
