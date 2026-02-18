@@ -1,110 +1,182 @@
-/* Container for the cards */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Small, separate cards */
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Individual Workout Card */
-.card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    padding: 15px;
-    text-align: center;
-    border-top: 8px solid #00d1b2; /* That vibrant teal */
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* Requirement: Image in each card */
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.card h3 {
-    margin: 10px 0 5px 0;
-    font-size: 1.4rem;
-    color: #363636;
-}
-
+/* 1. Variables & Base Styles */
 :root {
     --primary: #00d1b2; /* Vibrant Teal */
     --accent: #ff3860;  /* Bright Coral */
     --dark: #363636;
     --bg: #f5fffb;
+    --white: #ffffff;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg);
     margin: 0;
-    font-size: 1.2rem; /* Big text for readability */
+    color: var(--dark);
+    font-size: 1.1rem;
 }
 
-/* Requirement: Change title from domain name to Fitness Tracker */
+/* 2. Navigation */
+nav {
+    background: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
 nav h1 {
     color: var(--primary);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    margin: 0;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    border-top: 10px solid var(--primary);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Keeps images looking professional */
-    border-radius: 10px;
-    margin-bottom: 15px;
+.nav-links {
+    display: flex;
+    gap: 15px;
 }
 
 button {
     background: var(--accent);
     color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: 12px 25px;
+    font-size: 1rem;
     border-radius: 50px;
     font-weight: bold;
     cursor: pointer;
     border: none;
+    transition: transform 0.2s, background 0.2s;
 }
 
+button:hover {
+    transform: scale(1.05);
+    background: #e63255;
+}
+
+/* 3. Controls (Search/Filter/Sort) */
 .controls-bar {
     display: flex;
     gap: 15px;
     justify-content: center;
-    padding: 20px;
-    background: #fff;
-    margin-bottom: 20px;
+    padding: 25px;
+    background: white;
     border-bottom: 2px solid #eee;
 }
 
 .controls-bar input, .controls-bar select {
-    padding: 10px 15px;
-    border: 2px solid #00d1b2; /* Teal border */
-    border-radius: 8px;
+    padding: 12px 18px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
     font-size: 1rem;
     outline: none;
     font-family: inherit;
+    background: white;
 }
 
-.controls-bar input:focus {
-    box-shadow: 0 0 8px rgba(0, 209, 178, 0.3);
+/* 4. The Grid & Workout Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border-top: 10px solid var(--primary);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+}
+
+.btn-delete {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* 5. Production Dashboard (Stats) */
+.stats-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 40px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-top: 10px;
+}
+
+/* 6. Add New Workout Form Styling */
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Prevents input from overflowing */
+}
+
+.btn-save {
+    width: 100%;
+    background: var(--primary);
+    margin-top: 10px;
+}
+
+/* 7. Utilities */
+.hidden {
+    display: none !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 40px;
+}
+
+#page-info {
+    font-weight: bold;
 }
