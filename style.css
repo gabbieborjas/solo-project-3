@@ -1,49 +1,37 @@
-:root {
-    --primary: #00d1b2; /* Vibrant Teal */
-    --accent: #ff3860;  /* Bright Coral */
-    --dark: #363636;
-    --bg: #f5fffb;
+/* Container for the cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Small, separate cards */
+    gap: 20px;
+    padding: 20px;
 }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bg);
-    margin: 0;
-    font-size: 1.2rem; /* Big text for readability */
-}
-
-/* Requirement: Change title from domain name to Fitness Tracker */
-nav h1 {
-    color: var(--primary);
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
+/* Individual Workout Card */
 .card {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    border-top: 10px solid var(--primary);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 15px;
     text-align: center;
+    border-top: 8px solid #00d1b2; /* That vibrant teal */
+    transition: transform 0.2s;
 }
 
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Requirement: Image in each card */
 .card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover; /* Keeps images looking professional */
-    border-radius: 10px;
-    margin-bottom: 15px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
-button {
-    background: var(--accent);
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
+.card h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.4rem;
+    color: #363636;
 }
