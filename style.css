@@ -85,3 +85,26 @@ button {
     cursor: pointer;
     border: none;
 }
+
+.controls-bar {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+    background: #fff;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.controls-bar input, .controls-bar select {
+    padding: 10px 15px;
+    border: 2px solid #00d1b2; /* Teal border */
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    font-family: inherit;
+}
+
+.controls-bar input:focus {
+    box-shadow: 0 0 8px rgba(0, 209, 178, 0.3);
+}
