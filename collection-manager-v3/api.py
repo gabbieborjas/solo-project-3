@@ -73,6 +73,5 @@ def delete(id):
     return jsonify({"status": "deleted"})
 
 if __name__ == '__main__':
-    # Render requires binding to 0.0.0.0 and the PORT environment variable
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000)) # Change 5000 to 10000 to match your log
     app.run(host='0.0.0.0', port=port)
