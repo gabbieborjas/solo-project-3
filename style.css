@@ -35,3 +35,53 @@
     font-size: 1.4rem;
     color: #363636;
 }
+
+:root {
+    --primary: #00d1b2; /* Vibrant Teal */
+    --accent: #ff3860;  /* Bright Coral */
+    --dark: #363636;
+    --bg: #f5fffb;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    margin: 0;
+    font-size: 1.2rem; /* Big text for readability */
+}
+
+/* Requirement: Change title from domain name to Fitness Tracker */
+nav h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 10px solid var(--primary);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Keeps images looking professional */
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+button {
+    background: var(--accent);
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
