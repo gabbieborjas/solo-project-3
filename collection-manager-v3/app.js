@@ -1,17 +1,14 @@
 const API_URL = "/api/workouts";
-let allWorkouts = [];
 let currentPage = 1;
 
-// Requirement 5: Get page size from Cookie or default to 10
+// Requirement 5: Page size stored in COOKIE
 function getPageSize() {
     const match = document.cookie.match(/pageSize=(\d+)/);
     return match ? parseInt(match[1]) : 10;
 }
 
-// Requirement 5: Set Cookie when page size changes
 function updatePageSize(newSize) {
     document.cookie = `pageSize=${newSize}; path=/; max-age=31536000`;
-    document.getElementById('stat-pagesize').innerText = newSize;
     currentPage = 1;
     loadData();
 }
@@ -19,58 +16,57 @@ function updatePageSize(newSize) {
 async function loadData() {
     const limit = getPageSize();
     const offset = (currentPage - 1) * limit;
-    const category = document.getElementById('filter-category').value;
+    const cat = document.getElementById('filter-category').value;
     const sort = document.getElementById('sort-by').value;
 
     try {
-        // Calling your Python API (Requirement 5: Filter, Sort, Paging)
-        const res = await fetch(`${API_URL}?limit=${limit}&offset=${offset}&category=${category}&sort=${sort}`);
+        const res = await fetch(`${API_URL}?limit=${limit}&offset=${offset}&category=${cat}&sort=${sort}`);
         const result = await res.json();
-        
-        allWorkouts = result.data;
-        render(result.data, result.total);
+        render(result.data, result.total, result.total_minutes);
     } catch (err) {
-        console.error("SQL Connection Failed:", err);
+        console.error("Connection error:", err);
     }
 }
 
-function render(items, total) {
+function render(items, total, totalMinutes) {
     const grid = document.getElementById('grid');
-    // Requirement 4: Image requirement with placeholder for broken links
+    // Requirement 4: Images with Placeholder handling
     grid.innerHTML = items.map(w => `
         <div class="card">
-            <img src="${w.image_url}" onerror="this.src='https://via.placeholder.com/300x200?text=Fitness+Tracker'" alt="${w.name}">
+            <img src="${w.image_url}" onerror="this.src='https://via.placeholder.com/300x200?text=Workout'" alt="${w.name}">
             <h3>${w.name}</h3>
             <p><strong>${w.category}</strong> | ${w.duration} mins</p>
-            <div style="margin-top:10px;">
-                <button onclick="deleteItem(${w.id})">Delete</button>
-            </div>
+            <button onclick="deleteItem(${w.id})" class="del-btn">Delete</button>
         </div>
     `).join('');
 
-    // Update Stats View (Requirement 4)
+    // Requirement 4: Stats View Updates
     document.getElementById('stat-total').innerText = total;
     document.getElementById('stat-pagesize').innerText = getPageSize();
-    
-    // Pagination logic
+    document.getElementById('stat-minutes').innerText = totalMinutes;
+
     const totalPages = Math.ceil(total / getPageSize());
     document.getElementById('page-info').innerText = `Page ${currentPage} of ${totalPages || 1}`;
 }
 
-// Requirement 4: Delete confirmation
+// Requirement 4: Delete Confirmation
 async function deleteItem(id) {
-    if (confirm("Are you sure you want to delete this from the SQL database?")) {
+    if (confirm("Permanently delete this record from SQL?")) {
         await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
         loadData();
     }
 }
 
-// Navigation logic for sections
+function changePage(dir) {
+    currentPage += dir;
+    loadData();
+}
+
 function showSection(id) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
 }
 
-// Initial Load
+// Initial Call
 document.getElementById('page-size-select').value = getPageSize();
 loadData();
