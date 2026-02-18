@@ -97,14 +97,19 @@ async function deleteItem(id) {
  * Fixes the "buttons not working" issue by managing section visibility.
  */
 window.showSection = function(id) {
-    // Hide all sections first
+    // Hide all main sections
     document.getElementById('list-view').classList.add('hidden');
     document.getElementById('stats-view').classList.add('hidden');
-    if(document.getElementById('form-view')) {
-        document.getElementById('form-view').classList.add('hidden');
+    document.getElementById('form-view').classList.add('hidden');
+    
+    // Toggle the controls bar (only show it on list-view)
+    const controls = document.getElementById('workouts-controls');
+    if (id === 'list-view') {
+        controls.style.display = 'flex';
+    } else {
+        controls.style.display = 'none';
     }
 
-    // Show the requested section
     document.getElementById(id).classList.remove('hidden');
 };
 
